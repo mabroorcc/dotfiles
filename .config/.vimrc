@@ -24,16 +24,15 @@ Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
 Plug 'preservim/nerdtree'
+Plug 'preservim/nerdcommenter'
 call plug#end()
 
-
-"Global variables
-let g:coc_global_extensions = [ 'coc-tsserver' ]
+"Global variables let g:coc_global_extensions = [ 'coc-tsserver' ]
 let g:oceanic_material_transparent_background = 1
 
 
 " Settings
-syntax on
+syntax enable
 colorscheme oceanic_material
 set number
 set numberwidth=4
