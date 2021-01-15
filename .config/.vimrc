@@ -17,10 +17,6 @@ inoremap ' ''<left>
 inoremap ( ()<left>
 inoremap [ []<left>
 inoremap { {}<left>
-"inoremap {<CR> {<CR>}<ESC>O
-"
-"inoremap {;<CR> {<CR>};<ESC>O
-
 
 " Plugins 
 call plug#begin()
@@ -30,43 +26,50 @@ Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 Plug 'jparise/vim-graphql'        " GraphQL syntax
 Plug 'vim-scripts/Rainbow-Parenthesis' " colorfull brackets
 Plug 'neoclide/coc.nvim' , { 'branch' : 'release' } " Auto complete
-Plug 'glepnir/oceanic-material' " Color theme
+Plug 'glepnir/oceanic-material'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript','tsx','jsx', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] } " Auto formating
 Plug 'preservim/nerdtree' " File tree
 Plug 'preservim/nerdcommenter' " Commenting code
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " golang
 call plug#end()
 
 "Global variables let g:coc_global_extensions = [ 'coc-tsserver' ]
-let g:oceanic_material_transparent_background = 1
 let g:NERDTreeWinPos = "right"
 let NERDTreeQuitOnOpen = 1
 let NERDTreeMinimalUI = 1
 let g:coc_filetype_map = 0
 let g:closetag_xhtml_filetypes = 'xhtml,javascript.jsx,jsx'
+let g:oceanic_material_transparent_background=1
+
 " Settings
 syntax on
 colorscheme oceanic_material
 
-set number
-set numberwidth=6
+set numberwidth=4
 set ruler
-set relativenumber
-
 set shiftwidth=2
 set tabstop=2
 set softtabstop=2 " Number of spaces a tab counts when editing
-set expandtab
-
-set nobackup
 set nowritebackup
+set relativenumber
+set nu
+set nohlsearch
+set noerrorbells
+set expandtab
+set smartindent
+set nowrap
+set smartcase
 set noswapfile
-
-set ignorecase " Ignore case when searching
-set smartcase  " When searching try to be smart about cases
-set nohlsearch " Don't highlight search term
-set incsearch  " Jumping search
+set nobackup
+set incsearch
+set termguicolors
+set scrolloff=8
+set noshowmode
+set completeopt=menuone,noinsert,noselect
+set cmdheight=1
+hi Normal guibg=NONE ctermbg=NONE
 
 "syntax sync fromstart
 
