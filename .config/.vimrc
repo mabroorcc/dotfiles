@@ -5,7 +5,7 @@ nmap <space>of :GFiles<return>
 nmap <space>es :vsp ~/.vim/snippets/<return>
 nmap <space>vs :vsp .<return>
 nmap <space>sn :Snippets<return>
-nmap <space>vc :e ~/.vimrc<return>
+nmap <space>vc :vsp ~/.vimrc<return>
 nmap <space>rc :so ~/.vimrc<return>
 nmap <space>s :w<return>
 nmap <space>q :q<return>
@@ -94,8 +94,8 @@ let g:coc_filetype_map = 0
 let g:oceanic_material_transparent_background=1
 " Snippets settings "
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<C-b>"
+let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 
 " Settings
 syntax on
@@ -143,6 +143,7 @@ highlight PreProc          ctermfg=5    ctermbg=none    cterm=none
 highlight String           ctermfg=12   ctermbg=none    cterm=none
 highlight Number           ctermfg=1    ctermbg=none    cterm=none
 highlight Function         ctermfg=1    ctermbg=none    cterm=none
+hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
 
 
 "syntax sync fromstart

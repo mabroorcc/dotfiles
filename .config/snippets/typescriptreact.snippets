@@ -1,0 +1,28 @@
+snippet trc
+	export interface Props {
+
+	}
+
+	export const ${1}: React.FC<Props> = ({}) => {
+		
+		return (
+			<div>
+				${2}
+			</div>
+		)
+	}
+snippet <
+	<${1}>${2}</${0:$1}>
+snippet <c
+	<${1} />
+snippet cn
+	className="${1}"
+snippet &map
+	{ ${1} && 
+		${0:$1}.map((item) => {
+			return (
+				<div>
+
+				</div>
+			)
+	})}
