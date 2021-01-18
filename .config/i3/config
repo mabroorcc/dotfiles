@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:System San Francisco Display 11 
+font pango:System San Francisco Display 9
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -24,9 +24,7 @@ font pango:System San Francisco Display 11
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-
-# NetworkManager is the most popular way to manage wireless networks on Linux,
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
@@ -110,7 +108,7 @@ set $ws3 "3: Terminals  "
 set $ws4 "4: Browser  "
 set $ws5 "5: Tools"
 set $ws6 "6: Torrent"
-set $ws7 "7"
+set $ws7 "Spotify  "
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
@@ -132,6 +130,7 @@ assign [class="Firefox"] $ws4
 assign [class="Code"] $ws2
 assign [class="Postman"] $ws5
 assign [class="qBittorrent"] $ws6
+assign [class="Spotify"] $ws7
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -201,17 +200,17 @@ bindsym $mod+r mode "resize"
 
 # start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command i3blocks -c ~/.config/i3/i3blocks.conf
+  bar {
+        status_command ~/.config/bumblebee-status/bumblebee-status -m  spacer spacer spacer spacer spotify cpu memory disk pasink pasource network_traffic datetime -p spotify.format="{title}" pulseaudio.autostart="true" memory.format="{used}" disk.format="{left}" -t iceberg-dark-powerline
         colors {
-		background $bg-color
-	    	separator #757575
-		#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-	}
-}
+          background $bg-color
+          separator #ffffff
+          #                  border             background         text
+          focused_workspace  $bg-color          $bg-color          $text-color
+          inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+          urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+        }
+  }
 
 default_border pixel 0
 
