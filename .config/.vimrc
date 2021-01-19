@@ -1,47 +1,3 @@
-"Mappings
-nmap <space>fm :Prettier<return>
-nmap <space>pi :PlugInstall<return>
-nmap <space>of :GFiles<return>
-nmap <space>es :vsp ~/.vim/snippets/<return>
-nmap <space>vs :vsp .<return>
-nmap <space>sn :Snippets<return>
-nmap <space>vc :vsp ~/.vimrc<return>
-nmap <space>rc :so ~/.vimrc<return>
-nmap <space>s :w<return>
-nmap <space>q :q<return>
-nmap <space>f gt
-nmap <space>d gT
-inoremap jk <esc>
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <space>n :NERDTreeToggle<CR>
-" Remap splits navigation to just CTRL + hjkl
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-" Change 2 split windows from vert to horiz or horiz to vert
-map <Leader>th <C-w>t<C-w>H
-map <Leader>tk <C-w>t<C-w>K
-
-
-" Make adjusing split sizes a bit more friendly
-noremap <silent> <C-Left> :vertical resize +3<CR>
-noremap <silent> <C-Right> :vertical resize -3<CR>
-noremap <silent> <C-Up> :resize +3<CR>
-noremap <silent> <C-Down> :resize -3<CR>
-
-
-
-" Auto bracket close "
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-
 " Plugins 
 call plug#begin()
 
@@ -122,6 +78,13 @@ set scrolloff=8
 set noshowmode
 set cmdheight=1
 
+set shortmess+=c
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
 set splitbelow splitright
 hi Normal guibg=NONE ctermbg=NONE
 
@@ -144,6 +107,51 @@ highlight String           ctermfg=12   ctermbg=none    cterm=none
 highlight Number           ctermfg=1    ctermbg=none    cterm=none
 highlight Function         ctermfg=1    ctermbg=none    cterm=none
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
+
+"Mappings
+nmap <space>fm :Prettier<return>
+nmap <space>pi :PlugInstall<return>
+nmap <space>of :GFiles<return>
+nmap <space>es :vsp ~/.vim/snippets/<return>
+nmap <space>vs :vsp .<return>
+nmap <space>sn :Snippets<return>
+nmap <space>vc :vsp ~/.vimrc<return>
+nmap <space>rc :so ~/.vimrc<return>
+nmap <space>s :w<return>
+nmap <space>q :q<return>
+nmap <space>f gt
+nmap <space>d gT
+inoremap jk <esc>
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <space>n :NERDTreeToggle<CR>
+" Remap splits navigation to just CTRL + hjkl
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+" Change 2 split windows from vert to horiz or horiz to vert
+map <Leader>th <C-w>t<C-w>H
+map <Leader>tk <C-w>t<C-w>K
+
+
+" Make adjusing split sizes a bit more friendly
+noremap <silent> <C-Left> :vertical resize +3<CR>
+noremap <silent> <C-Right> :vertical resize -3<CR>
+noremap <silent> <C-Up> :resize +3<CR>
+noremap <silent> <C-Down> :resize -3<CR>
+
+" Auto bracket close "
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+
+"coc"
+nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
 
 
 "syntax sync fromstart

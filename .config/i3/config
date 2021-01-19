@@ -103,12 +103,12 @@ bindsym $mod+a focus parent
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1:  "
-set $ws2 "2: Code "
-set $ws3 "3: Terminals  "
+set $ws2 "2: Code  "
+set $ws3 "3: Terminal "
 set $ws4 "4: Browser  "
-set $ws5 "5: Tools"
-set $ws6 "6: Torrent"
-set $ws7 "Spotify  "
+set $ws5 "5: Tools "
+set $ws6 "6: Torrent "
+set $ws7 "7: Spotify "
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
@@ -130,6 +130,7 @@ assign [class="Firefox"] $ws4
 assign [class="Code"] $ws2
 assign [class="Postman"] $ws5
 assign [class="qBittorrent"] $ws6
+assign [class="spotify"] $ws7
 assign [class="Spotify"] $ws7
 
 # move focused container to workspace
