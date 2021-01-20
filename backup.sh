@@ -34,4 +34,4 @@ clear
 
 git add .
 git commit -m 'backed up configuration'
-git push -u origin main
+git push -u origin master
