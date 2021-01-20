@@ -223,6 +223,6 @@ bindsym $mod+shift+x exec i3lock -c 2f343f
 bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec  light -U 5 # decrease screen brightness
 
-exec_always --no-startup-id feh --bg-scale /home/mabroordev/Pictures/clouds.jpg
+exec_always --no-startup-id feh --bg-scale /home/mabroordev/Pictures/blackboy.jpg
 
 exec_always --no-startup-id compton -f
