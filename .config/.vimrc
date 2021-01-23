@@ -2,8 +2,9 @@
 call plug#begin()
 
 " Language Specific "
-Plug 'pangloss/vim-javascript'    " JavaScript support
+Plug 'HerringtonDarkholme/yats.vim' " TypeScript syntax
 Plug 'leafgarland/typescript-vim' " TypeScript syntax
+Plug 'pangloss/vim-javascript'    " JavaScript support
 Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 Plug 'jparise/vim-graphql'        " GraphQL syntax
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " golang
@@ -48,6 +49,7 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeMinimalUI = 1
 let g:coc_filetype_map = 0
 let g:oceanic_material_transparent_background=1
+""let g:typescript_ignore_typescriptdoc=1
 " Snippets settings "
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<C-b>"
@@ -159,4 +161,5 @@ augroup ReactFiletypes
   autocmd!
   autocmd BufRead,BufNewFile *.jsx set filetype=javascriptreact
   autocmd BufRead,BufNewFile *.tsx set filetype=typescriptreact
+  autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
 augroup END
