@@ -33,12 +33,10 @@ Plug 'preservim/nerdcommenter' " Commenting code
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-" Snippets "
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-
 " Icons in nerd-tree"
 Plug 'ryanoasis/vim-devicons'
+
+Plug 'alvan/vim-closetag'
 
 call plug#end()
 
@@ -49,11 +47,18 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeMinimalUI = 1
 let g:coc_filetype_map = 0
 let g:oceanic_material_transparent_background=1
-""let g:typescript_ignore_typescriptdoc=1
-" Snippets settings "
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<C-b>"
-let g:UltiSnipsJumpBackwardTrigger="<C-z>"
+let g:coc_snippet_next = '<tab>'
+" auto close jsx / tsx "
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.tsx'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx,*.tsx'
+let g:closetag_xhtml_filetypes = 'xhtml,jsx,tsx'
+let g:closetag_filetypes = 'html,xhtml,phtml,tsx'
+let g:closetag_emptyTags_caseSensitive = 1
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ }
+let g:closetag_shortcut = '>'
 
 " Settings
 syntax on
@@ -87,7 +92,11 @@ if has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
+
+" New windows will be on left "
 set splitbelow splitright
+
+" Removes background"
 hi Normal guibg=NONE ctermbg=NONE
 
 " Color and themeing "
@@ -111,7 +120,7 @@ highlight Function         ctermfg=1    ctermbg=none    cterm=none
 hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
 
 "Mappings
-nmap <space>fm :Prettier<return>
+nmap <space>bf :Prettier<return>
 nmap <space>pi :PlugInstall<return>
 nmap <space>of :GFiles<return>
 nmap <space>es :vsp ~/.vim/snippets/<return>
@@ -154,7 +163,16 @@ inoremap { {}<left>
 
 "coc"
 nnoremap <silent> <leader>h :call CocActionAsync('doHover')<cr>
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
 
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 "syntax sync fromstart
 augroup ReactFiletypes
