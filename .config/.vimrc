@@ -59,6 +59,7 @@ let g:closetag_regions = {
     \ 'javascript.jsx': 'jsxRegion',
     \ }
 let g:closetag_shortcut = '>'
+let mapleader = "," " map leader to comma
 
 " Settings
 syntax on
@@ -125,6 +126,8 @@ nmap <space>pi :PlugInstall<return>
 nmap <space>of :GFiles<return>
 nmap <space>es :vsp ~/.vim/snippets/<return>
 nmap <space>vs :vsp .<return>
+nmap <space>c :e .<return>
+nmap <space>n :NERDTreeToggle<CR>
 nmap <space>sn :Snippets<return>
 nmap <space>vc :vsp ~/.vimrc<return>
 nmap <space>rc :so ~/.vimrc<return>
@@ -137,7 +140,6 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <space>n :NERDTreeToggle<CR>
 " Remap splits navigation to just CTRL + hjkl
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j

@@ -3,7 +3,7 @@ snippet trc
 
 	}
 
-	export const ${1}: React.FC<Props> = ({}) => {
+	export const ${1}: React.FC<Props> = () => {
 		
 		return (
 			<div>
@@ -12,7 +12,11 @@ snippet trc
 		)
 	}
 snippet cn
+	className={classes.${1}}
+snippet cnt
 	className="${1}"
+snippet ust
+  const classes = useStyles();
 snippet &map
 	{ ${1} && 
 		${0:$1}.map((item) => {
