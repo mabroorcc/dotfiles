@@ -8,18 +8,20 @@ if (process.argv[2] == "backup") {
     console.log(".vimrc -->" + sout);
   });
 
+  exec("cp -r ~/.config/termite ~/dotfiles", (err, sout, serr) => {
+    handleErr(err, serr);
+    console.log(".vimrc -->" + sout);
+  });
+
   exec("cp -r ~/.i3 ~/dotfiles", (err, sout, serr) => {
     handleErr(err, serr);
     console.log(".i3 -->" + sout);
   });
 
-  exec(
-    "cp -r ~/.vim/snippets ~/dotfiles/.vim",
-    (err, sout, serr) => {
-      handleErr(err, serr);
-      console.log(".vim/sinppets -->" + sout);
-    }
-  );
+  exec("cp -r ~/.vim/snippets ~/dotfiles/.vim", (err, sout, serr) => {
+    handleErr(err, serr);
+    console.log(".vim/sinppets -->" + sout);
+  });
 
   exec("git add .", (err, sout, serr) => {
     handleErr(err, serr);
@@ -42,6 +44,11 @@ if (process.argv[2] == "do") {
   exec("cp ~/dotfiles/.vimrc ~/.vimrc", (err, sout, serr) => {
     handleErr(err, serr);
     console.log(".vimrc <--" + sout);
+  });
+
+  exec("cp -r ~/dotfiles/termite ~/.config", (err, sout, serr) => {
+    handleErr(err, serr);
+    console.log("termite <--" + sout);
   });
 
   exec("cp -r ~/dotfiles/.i3 ~", (err, sout, serr) => {
