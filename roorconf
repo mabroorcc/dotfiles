@@ -1,0 +1,61 @@
+#!/usr/bin/node
+const { exec } = require("child_process");
+
+// for backup
+if (process.argv[2] == "backup") {
+  exec("cp ~/.vimrc ~/dotfiles/.vimrc", (err, sout, serr) => {
+    handleErr(err, serr);
+    console.log(".vimrc -->" + sout);
+  });
+
+  exec("cp -r ~/.i3 ~/dotfiles/.i3", (err, sout, serr) => {
+    handleErr(err, serr);
+    console.log(".i3 -->" + sout);
+  });
+
+  exec(
+    "cp -r --parents ~/.vim/snippets ~/dotfiles/.vim/snippets",
+    (err, sout, serr) => {
+      handleErr(err, serr);
+      console.log(".vim/sinppets -->" + sout);
+    }
+  );
+
+  exec("git add .", (err, sout, serr) => {
+    handleErr(err, serr);
+    console.log("git add . -->" + sout);
+  });
+
+  exec("git commit -m 'backup'", (err, sout, serr) => {
+    handleErr(err, serr);
+    console.log("git commit -->" + sout);
+  });
+
+  exec("git push -u origin main", (err, sout, serr) => {
+    handleErr(err, serr);
+    console.log("git push -->" + sout);
+  });
+}
+
+// for seting the configuration
+if (process.argv[2] == "do") {
+  exec("cp ~/dotfiles/.vimrc ~/.vimrc", (err, sout, serr) => {
+    handleErr(err, serr);
+    console.log(".vimrc <--" + sout);
+  });
+
+  exec("cp -r ~/dotfiles/.i3 ~/.i3 ", (err, sout, serr) => {
+    handleErr(err, serr);
+    console.log(".i3 <--" + sout);
+  });
+
+  exec("cp -r ~/dotfiles/.vim/snippets ~/.vim/snippets", (err, sout, serr) => {
+    handleErr(err, serr);
+    console.log(".vim/sinppets <---" + sout);
+  });
+}
+
+function handleErr(err, serr) {
+  if (err) console.log("Err : " + err);
+  if (serr) console.log("Serr: " + serr);
+}
