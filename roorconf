@@ -31,7 +31,7 @@ if (process.argv[2] == "backup") {
     console.log("git commit -->" + sout);
   });
 
-  exec("git push -u origin main", (err, sout, serr) => {
+  exec("git push -u origin master", (err, sout, serr) => {
     handleErr(err, serr);
     console.log("git push -->" + sout);
   });
