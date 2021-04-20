@@ -44,12 +44,17 @@ if (process.argv[2] == "do") {
     console.log(".vimrc <--" + sout);
   });
 
-  exec("cp -r ~/dotfiles/.i3 ~/.i3 ", (err, sout, serr) => {
+  exec("cp -r ~/dotfiles/.i3 ~", (err, sout, serr) => {
     handleErr(err, serr);
     console.log(".i3 <--" + sout);
   });
 
-  exec("cp -r ~/dotfiles/.vim/snippets ~/.vim/snippets", (err, sout, serr) => {
+  exec("mkdir ~/.vim/snippets", (err, sout, serr) => {
+    handleErr(err, serr);
+    console.log("created .vim/sinppets <---" + sout);
+  });
+
+  exec("cp -r ~/dotfiles/.vim/snippets ~/.vim", (err, sout, serr) => {
     handleErr(err, serr);
     console.log(".vim/sinppets <---" + sout);
   });
