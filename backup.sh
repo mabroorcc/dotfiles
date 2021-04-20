@@ -3,10 +3,10 @@
 clear
 
 # vimrc
-if [ -e /home/mabroordev/.vimrc ];then
+if [ -e ~/.vimrc ];then
   echo "vimrc found...."
   clear
-  cp /home/mabroordev/.vimrc /home/mabroordev/dotfiles/.config/
+  cp ~/.vimrc ~/dotfiles/.config/
   echo ".vimrc backup done [success]"
   sleep 1
 else
@@ -15,10 +15,10 @@ else
 fi
 
 #Snippets
-if [ -d /home/mabroordev/.vim/snippets ];then
+if [ -d ~/.vim/snippets ];then
   echo "vim snippets found...."
   clear
-  cp -r /home/mabroordev/.vim/snippets /home/mabroordev/dotfiles/.config/
+  cp -r ~/.vim/snippets ~/dotfiles/.config/
   echo "vim snippets backup done [success]"
   sleep 1
 else
@@ -27,10 +27,10 @@ else
 fi
 
 # i3 config
-if [ -e /home/mabroordev/.config/i3/config ];then
+if [ -e ~/.i3 ];then
   echo "i3 config found...."
   clear
-  cp /home/mabroordev/.config/i3/config /home/mabroordev/dotfiles/.config/i3
+  cp -r ~/.i3 ~/dotfiles/.config/i3
   echo "i3 config backup done [success]"
   sleep 1
 else
