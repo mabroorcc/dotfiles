@@ -8,7 +8,7 @@ if (process.argv[2] == "backup") {
     console.log(".vimrc -->" + sout);
   });
 
-  exec("cp -r ~/.i3 ~/dotfiles/.i3", (err, sout, serr) => {
+  exec("cp -r ~/.i3 ~/dotfiles", (err, sout, serr) => {
     handleErr(err, serr);
     console.log(".i3 -->" + sout);
   });
