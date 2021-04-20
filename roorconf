@@ -14,7 +14,7 @@ if (process.argv[2] == "backup") {
   });
 
   exec(
-    "cp -r ~/.vim/snippets ~/dotfiles/.vim/snippets",
+    "cp -r ~/.vim/snippets ~/dotfiles/.vim",
     (err, sout, serr) => {
       handleErr(err, serr);
       console.log(".vim/sinppets -->" + sout);
