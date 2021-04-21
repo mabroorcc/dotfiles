@@ -2,6 +2,26 @@
 
 const { exec } = require("child_process");
 
+function handleErr(err, serr) {
+  if (err) console.log("Err : " + err);
+  if (serr) console.log("Serr: " + serr);
+}
+
+function run(cmd) {
+  exec(cmd, (err, sout, serr) => {
+    handleErr(err, serr);
+    console.log(sout);
+  });
+}
+
+function runc(cmd, callback) {
+  exec(cmd, (err, sout, serr) => {
+    handleErr(err, serr);
+    callback(sout);
+  });
+}
+
+// deleting all the containers
 if (process.argv[2] == "del") {
   exec('docker ps -a --format "{{.ID}}"', (err, sout, serr) => {
     if (err) console.log(err);
@@ -21,26 +41,24 @@ if (process.argv[2] == "del") {
   });
 }
 
+// deleting useless images
 if (process.argv[2] == "delimg") {
-  exec('docker images --format "{{.Tag}}|{{.ID}}"', (err, sout, serr) => {
-    handleErr(err, serr);
-    console.log(
-      sout
-        .split("\n")
-        .filter((val) => !val.includes("alpine"))
-        .filter((val) => val.length > 2)
-        .map((val) => val.split("|"))
-        .forEach((val) => {
-          exec("docker image rm -f " + val[1], (err, sout, serr) => {
-            handleErr(err, serr);
-            console.log(sout);
-          });
-        })
-    );
+  runc('docker images --format "{{.Tag}}|{{.ID}}"', (out) => {
+    out
+      .split("\n")
+      .filter((val) => !val.includes("alpine"))
+      .filter((val) => val.length > 2)
+      .map((val) => val.split("|"))
+      .forEach((val) => {
+        run("docker image rm -f " + val[1]);
+      });
   });
 }
 
-function handleErr(err, serr) {
-  if (err) console.log("Err : " + err);
-  if (serr) console.log("Serr: " + serr);
+// pulling usual images
+if (process.argv[2] == "pull") {
+  run("docker pull node:14-alpine");
+  run("docker pull postgres:alpine");
+  run("docker pull nginx:alpine");
+  run("docker pull redis:alpine");
 }

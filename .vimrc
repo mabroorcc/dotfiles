@@ -123,7 +123,6 @@ hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white
 "Mappings
 nmap <space>bf :Prettier<return>
 nmap <space>pi :PlugInstall<return>
-nmap <space>of :GFiles<return>
 nmap <space>es :vsp ~/.vim/snippets/<return>
 nmap <space>vs :vsp .<return>
 nmap <space>c :e .<return>
@@ -148,6 +147,9 @@ nnoremap <C-l> <C-w>l
 " Change 2 split windows from vert to horiz or horiz to vert
 map <Leader>th <C-w>t<C-w>H
 map <Leader>tk <C-w>t<C-w>K
+" file navigation"
+map <Leader>d :Buffers<return>
+nmap <Leader>f :GFiles<return>
 
 
 " Make adjusing split sizes a bit more friendly

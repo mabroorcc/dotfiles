@@ -8,9 +8,9 @@ if (process.argv[2] == "backup") {
     console.log(".vimrc -->" + sout);
   });
 
-  exec("cp -r ~/.config/termite ~/dotfiles", (err, sout, serr) => {
+  exec("cp -r ~/.config/alacritty ~/dotfiles", (err, sout, serr) => {
     handleErr(err, serr);
-    console.log(".vimrc -->" + sout);
+    console.log("alacrity.yml -->" + sout);
   });
 
   exec("cp -r ~/.i3 ~/dotfiles", (err, sout, serr) => {
@@ -46,9 +46,9 @@ if (process.argv[2] == "do") {
     console.log(".vimrc <--" + sout);
   });
 
-  exec("cp -r ~/dotfiles/termite ~/.config", (err, sout, serr) => {
+  exec("cp -r ~/dotfiles/alacritty ~/.config", (err, sout, serr) => {
     handleErr(err, serr);
-    console.log("termite <--" + sout);
+    console.log("alacritty.yml <--" + sout);
   });
 
   exec("cp -r ~/dotfiles/.i3 ~", (err, sout, serr) => {
