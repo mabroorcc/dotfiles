@@ -3,71 +3,42 @@ const { exec } = require("child_process");
 
 // for backup
 if (process.argv[2] == "backup") {
-  exec("cp ~/.vimrc ~/dotfiles/.vimrc", (err, sout, serr) => {
-    handleErr(err, serr);
-    console.log(".vimrc -->" + sout);
-  });
-
-  exec("cp -r ~/.config/alacritty ~/dotfiles", (err, sout, serr) => {
-    handleErr(err, serr);
-    console.log("alacrity.yml -->" + sout);
-  });
-
-  exec("cp -r ~/.i3 ~/dotfiles", (err, sout, serr) => {
-    handleErr(err, serr);
-    console.log(".i3 -->" + sout);
-  });
-
-  exec("cp -r ~/.vim/snippets ~/dotfiles/.vim", (err, sout, serr) => {
-    handleErr(err, serr);
-    console.log(".vim/sinppets -->" + sout);
-  });
-
-  exec("git add .", (err, sout, serr) => {
-    handleErr(err, serr);
-    console.log("git add . -->" + sout);
-  });
-
-  exec("git commit -m 'backup'", (err, sout, serr) => {
-    handleErr(err, serr);
-    console.log("git commit -->" + sout);
-  });
-
-  exec("git push -u origin master", (err, sout, serr) => {
-    handleErr(err, serr);
-    console.log("git push -->" + sout);
-  });
+  run("cp ~/.vimrc ~/dotfiles/.vimrc");
+  run("cp ~/.bashrc ~/dotfiles");
+  run("cp -r ~/.config/alacritty ~/dotfiles");
+  run("cp -r ~/.i3 ~/dotfiles");
+  run("cp -r ~/.vim/snippets ~/dotfiles/.vim");
+  run("git add .");
+  run("git commit -m 'backup'");
+  run("git push -u origin master");
 }
 
 // for seting the configuration
 if (process.argv[2] == "do") {
-  exec("cp ~/dotfiles/.vimrc ~/.vimrc", (err, sout, serr) => {
-    handleErr(err, serr);
-    console.log(".vimrc <--" + sout);
-  });
-
-  exec("cp -r ~/dotfiles/alacritty ~/.config", (err, sout, serr) => {
-    handleErr(err, serr);
-    console.log("alacritty.yml <--" + sout);
-  });
-
-  exec("cp -r ~/dotfiles/.i3 ~", (err, sout, serr) => {
-    handleErr(err, serr);
-    console.log(".i3 <--" + sout);
-  });
-
-  exec("mkdir ~/.vim/snippets", (err, sout, serr) => {
-    handleErr(err, serr);
-    console.log("created .vim/sinppets <---" + sout);
-  });
-
-  exec("cp -r ~/dotfiles/.vim/snippets ~/.vim", (err, sout, serr) => {
-    handleErr(err, serr);
-    console.log(".vim/sinppets <---" + sout);
-  });
+  run("cp ~/dotfiles/.bashrc ~/");
+  run("cp ~/dotfiles/.vimrc ~/.vimrc");
+  run("cp -r ~/dotfiles/alacritty ~/.config");
+  run("cp -r ~/dotfiles/.i3 ~");
+  run("mkdir ~/.vim/snippets");
+  run("cp -r ~/dotfiles/.vim/snippets ~/.vim");
 }
 
+// utillity functions
 function handleErr(err, serr) {
   if (err) console.log("Err : " + err);
   if (serr) console.log("Serr: " + serr);
+}
+
+function run(cmd) {
+  exec(cmd, (err, sout, serr) => {
+    handleErr(err, serr);
+    console.log("Done [" + cmd + "]-->" + sout);
+  });
+}
+
+function runc(cmd, callback) {
+  exec(cmd, (err, sout, serr) => {
+    handleErr(err, serr);
+    callback(sout);
+  });
 }
