@@ -1,5 +1,5 @@
 #!/usr/bin/node
-const { exec } = require("child_process");
+const { run, runc } = require("./myutils.js");
 
 // for backup
 if (process.argv[2] == "backup") {
@@ -21,24 +21,4 @@ if (process.argv[2] == "do") {
   run("cp -r ~/dotfiles/.i3 ~");
   run("mkdir ~/.vim/snippets");
   run("cp -r ~/dotfiles/.vim/snippets ~/.vim");
-}
-
-// utillity functions
-function handleErr(err, serr) {
-  if (err) console.log("Err : " + err);
-  if (serr) console.log("Serr: " + serr);
-}
-
-function run(cmd) {
-  exec(cmd, (err, sout, serr) => {
-    handleErr(err, serr);
-    console.log("Done [" + cmd + "]-->" + sout);
-  });
-}
-
-function runc(cmd, callback) {
-  exec(cmd, (err, sout, serr) => {
-    handleErr(err, serr);
-    callback(sout);
-  });
 }
