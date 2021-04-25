@@ -1,0 +1,17 @@
+#!/usr/bin/node
+const { runs, runcs } = require("./myutils");
+
+if (process.argv[2]) {
+  const file = `${process.env.PWD}/${process.argv[2]}`;
+  const bin = `${process.env.PWD}/bin`;
+
+  runcs(`gcc -o ${bin} ${file}`, () => {
+    runcs(bin, (out) => {
+      console.log(out);
+      runs(`rm ${bin}`);
+    });
+  });
+  return;
+}
+
+console.log("Please specify file!");

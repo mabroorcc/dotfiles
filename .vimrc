@@ -8,6 +8,7 @@ Plug 'pangloss/vim-javascript'    " JavaScript support
 Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
 Plug 'jparise/vim-graphql'        " GraphQL syntax
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " golang
+Plug 'vim-scripts/c.vim'
 
 " Colored Brackets "
 Plug 'frazrepo/vim-rainbow'
@@ -192,3 +193,4 @@ augroup ReactFiletypes
   autocmd BufRead,BufNewFile *.tsx set filetype=typescriptreact
   autocmd BufNewFile,BufRead *.ts setlocal filetype=typescript
 augroup END
+

@@ -1,48 +1,25 @@
 #!/usr/bin/node
 
-const { exec } = require("child_process");
-
-function handleErr(err, serr) {
-  if (err) console.log("Err : " + err);
-  if (serr) console.log("Serr: " + serr);
-}
-
-function run(cmd) {
-  exec(cmd, (err, sout, serr) => {
-    handleErr(err, serr);
-    console.log(sout);
-  });
-}
-
-function runc(cmd, callback) {
-  exec(cmd, (err, sout, serr) => {
-    handleErr(err, serr);
-    callback(sout);
-  });
-}
+const { run, runc } = require("./myutils");
+let ran = false;
 
 // deleting all the containers
-if (process.argv[2] == "del") {
-  exec('docker ps -a --format "{{.ID}}"', (err, sout, serr) => {
-    if (err) console.log(err);
+if (process.argv[2] == "dc") {
+  ran = true;
+  runc('docker ps -a --format "{{.ID}}"', (sout) => {
     if (sout) {
       const containers = sout.split("\n").filter((val) => val.length > 4);
       for (let cont of containers) {
         console.log("Deleting container with ID:" + cont);
-        exec("docker rm -f " + cont, (err, out, serr) => {
-          if (err) console.log(err);
-          if (serr) console.log(serr);
-          if (sout) console.log(out);
-        });
-        console.log("--------------------------------------");
+        run("docker rm -f " + cont);
       }
     }
-    if (serr) console.log(serr);
   });
 }
 
 // deleting useless images
-if (process.argv[2] == "delimg") {
+if (process.argv[2] == "di") {
+  ran = true;
   runc('docker images --format "{{.Tag}}|{{.ID}}"', (out) => {
     out
       .split("\n")
@@ -56,9 +33,23 @@ if (process.argv[2] == "delimg") {
 }
 
 // pulling usual images
-if (process.argv[2] == "pull") {
+if (process.argv[2] == "pi") {
+  ran = true;
   run("docker pull node:14-alpine");
   run("docker pull postgres:alpine");
   run("docker pull nginx:alpine");
   run("docker pull redis:alpine");
 }
+
+// deleting all the volumes
+if (process.argv[2] == "dv") {
+  ran = true;
+  runc(`docker volume list --format {{.Name}}`, (res) => {
+    res
+      .split("\n")
+      .filter((val) => val.length > 5)
+      .forEach((val) => run(`docker volume rm ${val}`));
+  });
+}
+
+ran ? null : console.log("Invalid Operation!");
