@@ -1,17 +1,18 @@
 #!/usr/bin/node
-const { runs, runcs } = require("./myutils");
+const { prun } = require("./myutils");
 
-if (process.argv[2]) {
-  const file = `${process.env.PWD}/${process.argv[2]}`;
-  const bin = `${process.env.PWD}/bin`;
-
-  runcs(`gcc -o ${bin} ${file}`, () => {
-    runcs(bin, (out) => {
-      console.log(out);
-      runs(`rm ${bin}`);
-    });
-  });
+if (!process.argv[2]) {
+  console.log("Please provide file name");
   return;
 }
 
-console.log("Please specify file!");
+const file = `${process.env.PWD}/${process.argv[2]}`;
+const bin = `${process.env.PWD}/bin`;
+
+prun(`gcc -o ${bin} ${file}`, true)
+  .then(() => prun(bin, true))
+  .then((res) => {
+    console.log(res);
+    return prun(`rm ${bin}`, true);
+  })
+  .catch((e) => console.log(e));

@@ -32,9 +32,21 @@ function runcs(cmd, callback) {
   });
 }
 
+function prun(cmd, silent = false) {
+  return new Promise((resolve, reject) => {
+    exec(cmd, (err, sout, serr) => {
+      if (err) return reject(err);
+      if (serr) return reject(serr);
+      if (!silent) console.log("Done ---> " + cmd + "\n");
+      resolve(sout);
+    });
+  });
+}
+
 module.exports = {
   run,
   runc,
   runs,
   runcs,
+  prun,
 };

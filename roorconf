@@ -1,16 +1,16 @@
 #!/usr/bin/node
-const { run, runc } = require("./myutils.js");
+const { run, runc, prun } = require("./myutils.js");
 
 // for backup
 if (process.argv[2] == "backup") {
-  run("cp ~/.vimrc ~/dotfiles/.vimrc");
-  run("cp ~/.bashrc ~/dotfiles");
-  run("cp -r ~/.config/alacritty ~/dotfiles");
-  run("cp -r ~/.i3 ~/dotfiles");
-  run("cp -r ~/.vim/snippets ~/dotfiles/.vim");
-  run("git add .");
-  run("git commit -m 'backup'");
-  run("git push -u origin master");
+  prun("cp ~/.vimrc ~/dotfiles/.vimrc")
+    .then(() => prun("cp ~/.vimrc ~/dotfiles/.vimrc"))
+    .then(() => prun("cp ~/.vimrc ~/dotfiles/.vimrc"))
+    .then(() => prun("cp ~/.bashrc ~/dotfiles"))
+    .then(() => prun("cp -r ~/.config/alacritty ~/dotfiles"))
+    .then(() => prun("cp -r ~/.i3 ~/dotfiles"))
+    .then(() => prun("cp -r ~/.vim/snippets ~/dotfiles/.vim"))
+    .catch((e) => console.log(e));
 }
 
 // for seting the configuration
