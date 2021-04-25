@@ -1,9 +1,9 @@
 #!/usr/bin/node
-const { run, runc, prun } = require("./myutils.js");
+const { prun, do_async } = require("./myutils.js");
 
 // for backup
 if (process.argv[2] == "backup") {
-  (async () => {
+  do_async(async () => {
     await prun("cp ~/.vimrc ~/dotfiles/.vimrc");
     await prun("cp ~/.vimrc ~/dotfiles/.vimrc");
     await prun("cp ~/.vimrc ~/dotfiles/.vimrc");
@@ -11,17 +11,17 @@ if (process.argv[2] == "backup") {
     await prun("cp -r ~/.config/alacritty ~/dotfiles");
     await prun("cp -r ~/.i3 ~/dotfiles");
     await prun("cp -r ~/.vim/snippets ~/dotfiles/.vim");
-  })().catch((e) => console.log(e));
+  });
 }
 
 // for seting the configuration
 if (process.argv[2] == "do") {
-  (async () => {
+  do_async(async () => {
     await prun("cp ~/dotfiles/.bashrc ~/");
     await prun("cp ~/dotfiles/.vimrc ~/.vimrc");
     await prun("cp -r ~/dotfiles/alacritty ~/.config");
     await prun("cp -r ~/dotfiles/.i3 ~");
     prun("mkdir ~/.vim/snippets").catch(() => {});
     await prun("cp -r ~/dotfiles/.vim/snippets ~/.vim");
-  })().catch((e) => console.log(e));
+  });
 }

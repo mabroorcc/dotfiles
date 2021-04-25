@@ -43,10 +43,15 @@ function prun(cmd, silent = false) {
   });
 }
 
+function do_async(fn) {
+  fn().catch((e) => console.log(e));
+}
+
 module.exports = {
   run,
   runc,
   runs,
   runcs,
   prun,
+  do_async
 };

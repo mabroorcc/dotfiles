@@ -1,18 +1,18 @@
 #!/usr/bin/node
-const { prun } = require("./myutils");
+
+const { prun, do_async } = require("./myutils");
 
 if (!process.argv[2]) {
-  console.log("Please provide file name");
+  console.log("Please provide file name!");
   return;
 }
 
 const file = `${process.env.PWD}/${process.argv[2]}`;
 const bin = `${process.env.PWD}/bin`;
 
-prun(`gcc -o ${bin} ${file}`, true)
-  .then(() => prun(bin, true))
-  .then((res) => {
-    console.log(res);
-    return prun(`rm ${bin}`, true);
-  })
-  .catch((e) => console.log(e));
+do_async(async () => {
+  await prun(`gcc -o ${bin} ${file}`, true);
+  const res = await prun(bin, true);
+  console.log(res);
+  await prun(`rm ${bin}`, true);
+});

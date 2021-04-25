@@ -1,0 +1,79 @@
+#!/usr/bin/node
+const { prun, do_async } = require("./myutils");
+let ran = false;
+
+// deleting all the containers
+if (process.argv[2] == "dc") {
+  do_async(async () => {
+    const sout = await prun('docker ps -a --format "{{.ID}}"');
+    if (sout) {
+      for (let container of sout.split("\n").filter((val) => val.length > 4)) {
+        await prun("docker rm -f " + container);
+      }
+    }
+  });
+  ran = true;
+}
+
+// deleting useless images
+if (process.argv[2] == "di") {
+  ran = true;
+  do_async(async () => {
+    const input = await prun(
+      'docker images --format "{{.Repository}}|{{.ID}}"'
+    );
+    const images = getAllImagesExcept(input, [
+      "redis",
+      "postgres",
+      "node",
+      "nginx",
+    ]);
+    for (image of images) {
+      await prun("docker image rm -f " + image[1]);
+    }
+  });
+}
+
+// pulling usual images
+if (process.argv[2] == "pi") {
+  do_async(async () => {
+    await prun("docker pull node:14-alpine");
+    await prun("docker pull postgres:alpine");
+    await prun("docker pull nginx:alpine");
+    await prun("docker pull redis:alpine");
+  });
+  ran = true;
+}
+
+// deleting all the volumes
+if (process.argv[2] == "dv") {
+  do_async(async () => {
+    const res = await prun(`docker volume list --format {{.Name}}`);
+    const volumes = getAllVolumes(res);
+    for (let volume of volumes) {
+      await prun("docker volume rm -f " + volume);
+    }
+  });
+  ran = true;
+}
+
+ran ? null : console.log("Invalid Operation!");
+
+// script utils
+const getAllVolumes = (input) => {
+  return input.split("\n").filter((val) => val.length > 5);
+};
+
+const getAllImagesExcept = (input, images) => {
+  return input
+    .split("\n")
+    .filter((val) => val.length > 2)
+    .map((val) => val.split("|"))
+    .filter((val) => {
+      const idx = images.indexOf(val[0]);
+      if (idx === -1) {
+        return true;
+      }
+      return false;
+    });
+};
