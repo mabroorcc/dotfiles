@@ -5,11 +5,10 @@ const { prun, do_async } = require("./myutils.js");
 if (process.argv[2] == "backup") {
   do_async(async () => {
     await prun("cp ~/.vimrc ~/dotfiles/.vimrc");
-    await prun("cp ~/.vimrc ~/dotfiles/.vimrc");
-    await prun("cp ~/.vimrc ~/dotfiles/.vimrc");
     await prun("cp ~/.bashrc ~/dotfiles");
+    await prun("cp ~/.zshrc ~/dotfiles");
     await prun("cp -r ~/.config/alacritty ~/dotfiles");
-    await prun("cp -r ~/.i3 ~/dotfiles");
+    //await prun("cp -r ~/.i3 ~/dotfiles");
     await prun("cp -r ~/.vim/snippets ~/dotfiles/.vim");
   });
 }
@@ -18,6 +17,7 @@ if (process.argv[2] == "backup") {
 if (process.argv[2] == "do") {
   do_async(async () => {
     await prun("cp ~/dotfiles/.bashrc ~/");
+    await prun("cp ~/dotfiles/.zshrc ~/.zshrc");
     await prun("cp ~/dotfiles/.vimrc ~/.vimrc");
     await prun("cp -r ~/dotfiles/alacritty ~/.config");
     await prun("cp -r ~/dotfiles/.i3 ~");
