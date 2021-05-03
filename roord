@@ -2,6 +2,14 @@
 const { prun, do_async } = require("./myutils");
 let ran = false;
 
+if (process.argv[2] == "--help") {
+  ran = true;
+  console.log("[ dc ] --> delete all the containers");
+  console.log("[ di ] --> delete all the images except some");
+  console.log("[ pi ] --> pull the usual images");
+  console.log("[ dv ] --> delete all the volumes");
+}
+
 // deleting all the containers
 if (process.argv[2] == "dc") {
   do_async(async () => {
