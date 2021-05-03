@@ -20,7 +20,7 @@ if (process.argv[2] == "do") {
     await prun("cp ~/dotfiles/.zshrc ~/.zshrc");
     await prun("cp ~/dotfiles/.vimrc ~/.vimrc");
     await prun("cp -r ~/dotfiles/alacritty ~/.config");
-    await prun("cp -r ~/dotfiles/.i3 ~");
+    //await prun("cp -r ~/dotfiles/.i3 ~");
     prun("mkdir ~/.vim/snippets").catch(() => {});
     await prun("cp -r ~/dotfiles/.vim/snippets ~/.vim");
   });
