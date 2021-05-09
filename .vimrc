@@ -6,20 +6,13 @@ Plug 'HerringtonDarkholme/yats.vim' " TypeScript syntax
 Plug 'leafgarland/typescript-vim' " TypeScript syntax
 Plug 'pangloss/vim-javascript'    " JavaScript support
 Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
-Plug 'jparise/vim-graphql'        " GraphQL syntax
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' } " golang
-Plug 'vim-scripts/c.vim'
 
-" Colored Brackets "
-Plug 'frazrepo/vim-rainbow'
 
 " Code completion "
 Plug 'neoclide/coc.nvim' , { 'branch' : 'release' } " Auto complete
 
 " Code formating"
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript','tsx','jsx', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] } " Auto formating
+Plug 'prettier/vim-prettier', { 'do': 'yarn install','for': ['javascript','tsx','jsx', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] } " Auto formating
 
 " Theme"
 Plug 'glepnir/oceanic-material'

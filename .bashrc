@@ -141,3 +141,4 @@ ex ()
 export PATH="~/dotfiles:$PATH"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+. "$HOME/.cargo/env"

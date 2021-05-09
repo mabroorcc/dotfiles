@@ -8,7 +8,6 @@ if (process.argv[2] == "backup") {
     await prun("cp ~/.bashrc ~/dotfiles");
     await prun("cp ~/.zshrc ~/dotfiles");
     await prun("cp -r ~/.config/alacritty ~/dotfiles");
-    //await prun("cp -r ~/.i3 ~/dotfiles");
     await prun("cp -r ~/.vim/snippets ~/dotfiles/.vim");
   });
 }
@@ -20,7 +19,6 @@ if (process.argv[2] == "do") {
     await prun("cp ~/dotfiles/.zshrc ~/.zshrc");
     await prun("cp ~/dotfiles/.vimrc ~/.vimrc");
     await prun("cp -r ~/dotfiles/alacritty ~/.config");
-    //await prun("cp -r ~/dotfiles/.i3 ~");
     prun("mkdir ~/.vim/snippets").catch(() => {});
     await prun("cp -r ~/dotfiles/.vim/snippets ~/.vim");
   });
