@@ -35,6 +35,7 @@ if (process.argv[2] == "di") {
       "postgres",
       "node",
       "nginx",
+      "gcr.io/k8s-minikube/kicbase",
     ]);
     for (image of images) {
       await prun("docker image rm -f " + image[1]);
