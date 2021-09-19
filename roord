@@ -1,5 +1,6 @@
 #!/usr/bin/node
-const { prun, do_async } = require("./myutils");
+const {prun, do_async} = require("./myutils");
+
 let ran = false;
 
 if (process.argv[2] == "--help") {
